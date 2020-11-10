@@ -1,11 +1,16 @@
 const express =require('express');
 const app=express();
 const fs=require('fs');
-var qs = require('querystring');
+const qs = require('querystring');
+const compression = require('compression')
 const path = require('path');
 const sanitizeHtml = require('sanitize-html');
 const template = require('./lib/template.js');
+const bodyParser=require('body-parser');
 const port=3000;
+
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(compression());
 
 //routing
 app.get('/',(req,res)=>{
@@ -65,19 +70,14 @@ app.get('/create',function(req,res){
 });
 
 app.post('/create_process',function(req,res){
-  var body = '';
-      req.on('data', function(data){
-          body = body + data;
-      });
-      req.on('end', function(){
-          var post = qs.parse(body);
-          var title = post.title;
-          var description = post.description;
-          fs.writeFile(`data/${title}`, description, 'utf8', function(err){
-            res.redirect(`/?id=${title}`);
-          })
-      });
-})
+  var post = req.body;
+  var title = post.title;
+  var description = post.description;
+  fs.writeFile(`data/${title}`, description, 'utf8', function (err) {
+    res.redirect(`/?id=${title}`);
+  })
+
+});
 
 app.get('/update/:pageId',function(req,res){
   fs.readdir('./data', function(error, filelist){
@@ -103,40 +103,29 @@ app.get('/update/:pageId',function(req,res){
       res.send(html);
     });
   });
-})
+});
 
 app.post('/update_process',function(req, res){
-  var body = '';
-  req.on('data', function(data){
-          body = body + data;
-      });
-      req.on('end', function(){
-          var post = qs.parse(body);
-          var id = post.id;
-          var title = post.title;
-          var description = post.description;
-          fs.rename(`data/${id}`, `data/${title}`, function(error){
-            fs.writeFile(`data/${title}`, description, 'utf8', function(err){
-              res.writeHead(302, {Location: `/?id=${title}`});
-              res.end();
-            })
-          });
-      });
+  var post = req.body;
+  var id = post.id;
+  var title = post.title;
+  var description = post.description;
+  fs.rename(`data/${id}`, `data/${title}`, function (error) {
+    fs.writeFile(`data/${title}`, description, 'utf8', function (err) {
+      res.redirect(`/?id=${title}`);
+    })
+  });
 });
 
 app.post('/delete_process',function(req,res){
-  var body = '';
-  req.on('data', function(data){
-      body = body + data;
+  
+  var post = req.body;
+  var id = post.id;
+  var filteredId = path.parse(id).base;
+  fs.unlink(`data/${filteredId}`, function (error) {
+    res.redirect('/');
   });
-  req.on('end', function(){
-      var post = qs.parse(body);
-      var id = post.id;
-      var filteredId = path.parse(id).base;
-      fs.unlink(`data/${filteredId}`, function(error){
-        res.redirect('/');
-      })
-  });
+
 });
 
 
