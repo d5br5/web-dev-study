@@ -1,0 +1,9 @@
+추후 알아두면 좋은 것
+
+템플릿 엔진 : Pug
+Database 
+middleware
+
+
+expressjs.com 
+가이드 문서 참고
