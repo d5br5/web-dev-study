@@ -3,10 +3,16 @@ var router=express.Router()
 const path = require('path');
 const fs=require('fs');
 const sanitizeHtml = require('sanitize-html');
-const template = require('../lib/template.js');
+const template = require('../lib/template');
+const auth = require('../lib/auth');
+
 
 router.get('/create',function(req,res){
   
+  if(!auth.IsOwner(req,res)){
+    res.redirect('/');
+    return false;
+  }
     var title = 'WEB - create';
     var list = template.list(req.list);
     var html = template.HTML(title, list, `
@@ -19,11 +25,15 @@ router.get('/create',function(req,res){
           <input type="submit">
         </p>
       </form>
-    `, '');
+    `, '',auth.StatusUI(req,res));
     res.send(html);
   });
   
   router.post('/create_process',function(req,res){
+    if(!auth.IsOwner(req,res)){
+      res.redirect('/');
+      return false;
+    }
     var post = req.body;
     var title = post.title;
     var description = post.description;
@@ -34,6 +44,10 @@ router.get('/create',function(req,res){
   
   
   router.get('/update/:pageId',function(req,res){
+    if(!auth.IsOwner(req,res)){
+      res.redirect('/');
+      return false;
+    }
     var filteredId = path.parse(req.params.pageId).base;
     fs.readFile(`data/${filteredId}`, 'utf8', function(err, description){
       var title = req.params.pageId;
@@ -51,7 +65,8 @@ router.get('/create',function(req,res){
           </p>
         </form>
         `,
-        `<a href="/topic/create">create</a> <a href="/topic/update/${title}">update</a>`
+        `<a href="/topic/create">create</a> <a href="/topic/update/${title}">update</a>`,
+        auth.StatusUI(req,res)
       );
       res.send(html);
     });
@@ -59,6 +74,10 @@ router.get('/create',function(req,res){
   });
   
   router.post('/update_process',function(req, res){
+    if(!auth.IsOwner(req,res)){
+      res.redirect('/');
+      return false;
+    }
     var post = req.body;
     var id = post.id;
     var title = post.title;
@@ -71,7 +90,10 @@ router.get('/create',function(req,res){
   });
   
   router.post('/delete_process',function(req,res){
-    
+    if(!auth.IsOwner(req,res)){
+      res.redirect('/');
+      return false;
+    }
     var post = req.body;
     var id = post.id;
     var filteredId = path.parse(id).base;
@@ -101,7 +123,7 @@ router.get('/create',function(req,res){
                 <form action="/topic/delete_process" method="post">
                   <input type="hidden" name="id" value="${sanitizedTitle}">
                   <input type="submit" value="delete">
-                </form>`
+                </form>`,auth.StatusUI(req,res)
         );
         res.send(html);
       }
