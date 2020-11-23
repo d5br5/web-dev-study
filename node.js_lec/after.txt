@@ -1,0 +1,4 @@
+session
+indexed DB
+hash, salt, key stretching
+=> PBKDF2, bcrypt
