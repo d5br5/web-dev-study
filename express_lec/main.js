@@ -30,7 +30,6 @@ app.get('*',function(req, res, next){
 
 //routing
 
-
 app.use('/', indexRouter);
 
 app.use('/topic',topicRouter); //topic으로 시작하는 페이지에 topicRouter 미들웨어를 적용하겠다.
