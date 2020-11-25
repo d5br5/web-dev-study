@@ -5,12 +5,6 @@ const fs = require('fs');
 const sanitizeHtml = require('sanitize-html');
 const template = require('../lib/template.js');
 
-var authData = {
-  email: 'happy@gmail.com',
-  password: '1111',
-  nickname: 'doh'
-}
-
 router.get('/login', function (req, res) {
   var title = 'WEB - Login';
   var list = template.list(req.list);
@@ -26,6 +20,7 @@ router.get('/login', function (req, res) {
   res.send(html);
 });
 
+/*
 router.post('/login_process', function (req, res) {
   var post = req.body;
   var email = post.email;
@@ -40,8 +35,8 @@ router.post('/login_process', function (req, res) {
     res.send('Whhooo?');
   }
   res.redirect(`/auth/`);
-
 });
+*/
 
 router.get('/logout', function (req, res) {
   req.session.destroy(function (err) {
