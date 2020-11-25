@@ -4,10 +4,11 @@ const fs = require('fs');
 const qs = require('querystring');
 const compression = require('compression');
 const session = require('express-session');
-var FileStore = require('session-file-store')(session)
+const FileStore = require('session-file-store')(session)
 const sanitizeHtml = require('sanitize-html');
 const helmet = require('helmet');
 app.use(helmet());
+const flash=require('connect-flash');
 
 
 const template = require('./lib/template.js');
@@ -45,6 +46,20 @@ var passport = require('passport')
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
+app.get('/flash', function(req, res){
+  // Set a flash message by passing the key, followed by the value, to req.flash().
+  req.flash('msg', 'Flash is back!!!')
+  res.send('flash');
+});
+
+app.get('/flash-display', function(req, res){
+  // Get an array of flash messages by passing the key to req.flash()
+  var fmsg=req.flash();
+  console.log(fmsg);
+  res.send(fmsg);
+  //res.render('index', { messages: req.flash('info') });
+});
 
 passport.serializeUser(function(user, done) {
   console.log('serializeUser',user);
@@ -53,7 +68,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
   console.log('deserializeUser',id);
-  done(null, authData);
+  done(null, authData); // authData => req.user
 });
 
 passport.use(new LocalStrategy(

@@ -39,8 +39,12 @@ router.post('/login_process', function (req, res) {
 */
 
 router.get('/logout', function (req, res) {
-  req.session.destroy(function (err) {
-    req.redirect('/');
+  req.logout();
+  // req.session.destroy(function (err) {
+  //   res.redirect('/');
+  // });
+  req.session.save(function(){
+    res.redirect('/');
   })
 });
 

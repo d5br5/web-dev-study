@@ -1,6 +1,6 @@
 module.exports = {
     IsOwner: function (req, res) {
-        if (req.session.is_logined) {
+        if (req.user) {
             return true;
         } else {
             return false;
@@ -9,7 +9,7 @@ module.exports = {
     StatusUI: function (req, res) {
         var authStatusUI = '<a href="/auth/login">Login</a>';
         if (this.IsOwner(req, res)) {
-            authStatusUI = `${req.session.nickname} | <a href="/auth/logout">Logout</a>`;
+            authStatusUI = `${req.user.nickname} | <a href="/auth/logout">Logout</a>`;
         }
         return authStatusUI;
     }
