@@ -1,0 +1,47 @@
+def open():
+    print("신규 계좌 오픈")
+
+def deposit(balance, money):
+    print("입금이 완료되었습니다. 잔액은 {0}원 입니다.".format(balance+money))
+    return balance+money
+
+def profile(name, age=10, main_lang="파이썬"):
+    print(name, age, main_lang, end=" ") // end 없으면 줄바꿈. 있으면 저부분으로 마무리 
+
+profile(main_lang="자바", age=20, name="김태호") // 순서 바뀌어도 이름 지정해주면 됨
+
+def profile(name, age, *language):
+    print(name, age, end=" ")
+    for lang in language:
+        print(lang, end=" ")
+    print()
+
+profile("김태호", 25, "kot", "ios")
+
+지역변수
+gun = 10    
+def check(soldiers):
+    global gun          // 선언하면 밖에 있는 값 그대로 사용. 안하면 지역변수
+    gun=gun-soldiers
+
+def standard_weight(height, gender):
+    if gender=="male":
+        coeff=22
+    elif gender=="female":
+        coeff=21
+    stan_wh=round(coeff*height*height/10000,2)
+    print("키 {0}cm {1}의 표준 체중은 {2}kg입니다.".format(height, gender, stan_wh))
+
+standard_weight(162, "male")
+
+[내장함수]
+list of python builtins 로 검색 가능.
+import 필요 없음.
+input : 사용자 입력을 받음
+dir : 객체가 어떤 변수와 함수를 갖고 있는지 표시
+import random
+print(dir(random))
+
+[외장함수]
+list of python modules 로 검색 가능.
+import 필요함.

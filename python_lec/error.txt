@@ -1,0 +1,57 @@
+try:
+    num1=int(input("첫 숫자 : "))
+    num2=int(input("두번째 숫자 : "))
+    print("결과 : {0}".format(int(num1/num2)))
+except ValueError:                  # 숫자/문자 불가능
+    print("error 발생!")
+except ZeroDivisionError as err:    # 0으로 나누는 경우
+    print("0으로는 못나눠요 ㅜ {0}".format(err))
+except Exception as err :           # 나머지 모든 에러
+    print(err)
+
+class BigNumberError(Exception):
+    def __init__(self, msg):
+        self.msg=msg
+    def __str__(self):
+        return self.msg
+try:
+    num1 = int(input("첫 수:"))
+    if num1 >= 10:
+        raise BigNumberError("입력 값 : {0}".format(num1))
+except ValueError as err:
+    print("잘못된 값 입력했습니다.{0}".format(err))
+except BigNumberError as err:
+    print("수가 너무 큽니다.")
+    print(err)
+finally:
+    print("계산기를 이용해 주셔서 감사합니다.")
+
+
+class SoldOutError(Exception):
+    def __init__(self, msg):
+        self.msg=msg
+    def __str__ (self):
+        return self.msg
+
+chicken=10
+waiting = 0
+
+while(True):
+    try:
+        if chicken==0:
+            raise SoldOutError("재고가 소진되어 더 이상 주문을 받지 않습니다.")
+        print("[남은 치킨 : {0}]".format(chicken))
+        order = int(input("치킨 몇 마리 주문하시겠습니까?"))
+        if order <= 0 :
+            raise ValueError
+        elif order > chicken :
+            print("재료가 부족합니다.")
+        else :
+            waiting += 1
+            print("[대기번호 {0}] 치킨 {1}마리 주문이 완료되었습니다.".format(waiting, order))
+            chicken -= order
+    except ValueError:
+        print("잘못된 값을 입력하셨습니다.")
+    except SoldOutError as err:
+        print(err)
+        break

@@ -1,0 +1,76 @@
+weather=input("오늘 날씨?")
+if weather =="비" or "눈":
+    print("우산을 챙기세요")
+elif weather =="미세먼지":
+    print("마스크를 챙기세요")
+else :
+    print("준비물 필요 없음")
+
+temp = int(input("오늘 기온?"))
+if 30<=temp :
+    print("너무 더워요. 나가지 마세요.")
+elif 10<=temp and temp <30:
+    print("날씨 좋네요.")
+elif 0<=temp<10 :
+    print("외투를 챙기세요")
+else :
+    print("나가지 마세요.")
+
+for waiting_no in range(1,6):
+    print("대기번호 : {0}".format(waiting_no))
+
+starbucks = ["아이언맨","토르"]
+for customer in starbucks:
+    print("{0}, 커피 나왔습니다.".format(customer))
+
+while
+customer = "토르"
+index = 5
+while index >=1 :
+    print("{0}, 커피 준비되었습니다. {1}번 남았어요.".format(customer,index))
+    index -= 1
+    if index ==0:
+        print("커피가 폐기처분되었습니다.")
+customer = "아이언맨"
+index = 5
+while True:
+    print("{0}, 커피 준비되었습니다. {1}번 남았어요.".format(customer,index))
+    index -=1
+    if index ==0:
+        print("폐기합니다.")
+        break
+person = "unknown"
+while person!= customer :
+    print("{0}, 커피 준비 완료".format(customer))
+    person = input("이름?")
+    
+absent = [2,5]
+no_book = [7,9]
+for student in range(1,9):
+    if student in absent : 
+        continue
+    elif student in no_book:
+        break
+    print("{0}번, 읽어봐.".format(student))
+
+student = [1,2,3,4,5]
+student = [i+100 for i in student]
+
+hero=["Iron man", "Thor", "I am groot"]
+heros=[len(i) for i in hero]
+heroname =[i.upper() for i in hero]
+print(hero)
+print(heros)
+print(heroname)
+
+from random import *
+cnt = 0
+for i in range(1,51):
+    time = randint(5,51)
+    if 5<=time<=15: 
+        go="O"
+        cnt+=1
+    else:
+        go=" "
+    print("[{0}] {1}번째 손님 (소요시간 : {2}분)".format(go,i,time))
+print("총 탑승 승객 : {0}분".format(cnt)) 

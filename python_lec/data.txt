@@ -1,0 +1,148 @@
+[숫자연산]
+5*2
+6/3
+2**3
+5%4
+5//3
+
+[비교연산]
+3==3
+4!=2
+5>=3
+4<7
+
+not(1 != 3) // false
+(3>0) and (3<5) //false
+(3>0) & (3<5) //true
+(3>0) or (3>5) //true
+(3<0) | (3>5) //false
+
+[재귀연산]
+num = 8
+num += 2
+*= -= /= %=
+
+[숫자 함수]
+abs(x) // x의 절댓값
+pow(x, y)  // x**y
+max(a, b), min(a, b)
+round(3.14) // 소수 아래 반올림
+
+from math import *
+floor(x) // 소수 아래 버림  == int(x)
+ceil(x) // 소수 아래 올림
+sqrt(x) // 제곱근
+
+from random import *
+random()  // 0~1 난수 
+randrange(1,45)  // 1이상 45미만 임의의 정수
+randint(1,45)    // 1이상 45이하 임의의 정수
+shuffle(lst)
+sample(lst,2)
+
+[문자열]
+sentence="""
+dsfsdfsdf
+"""
+sentence[5]=d
+number="961000-1234567"
+number[:6]
+number[7:]
+number[-7:]
+
+문자열 함수
+number.lower()
+number.upper()
+.isupper()
+len(number)
+number.replacer("10","456456")
+number.index("nx")  //없을 시 오류
+number.index("nx",7)
+number.find("nx")   //없을 시 -1
+number.count("n")
+
+문자열 포맷
+print("나는 %d살입니다." %20)
+print("나는 %s살입니다." %"파이썬")
+print("나는 %c살입니다." %"A")
+print("나는 %d살%s %s입니다." %(20,"fd","sdf"))
+print("나는 {0}살 {2}입니다.".format(20,"파란색","하양"))
+print("나는 {age}살이며, {color}색을 좋아해요".format(age=20, color="하양"))
+
+age=20
+color="빨강"
+print(f"나는{age} 살이며, {color}색을 좋아해요.)
+
+[탈출 문자]
+\n : 줄바꿈
+\" \' \\ 그냥
+\r : 커서를 맨 앞으로 이동해서 덮어쓰기
+\b : backspace 한글자 삭제
+\t : tab
+
+site="http://google.co.kr"
+cut=site[7:site.index(".")]
+pw = cut[:3]+str(len(cut))+str(cut.count("e"))+"!"
+
+[리스트]
+subway=["유재석","조세호","박명수"]
+subway.index("조세호")
+subway.append("하하")
+subway.insert(1, "정형돈")
+subway.pop()
+subway.count("유재석")
+
+num=[5,4,3,1,2]
+num.sort()
+num.reverse()
+num.clear()
+num.extend(subway)
+
+[사전]
+cabinet={3:"유재석", 100:"김태호"}
+cabinet[3]
+cabinet.get(3)
+cabinet[5]     // 없는 것. 오류내고 종료
+cabinet.get(5) // 없으면. "None" 출력 후 계속 진행
+cabinet.get(5, "None 대체 문자열")
+3 in cabinet // true
+cabinet["hi"]="조세호"  // 값 추가 or 업데이트
+
+del cabinet[3]  // 값 삭제
+cabinet.keys()
+cabinet.values() 
+cabinet.items()
+cabinet.clear()
+
+[튜플] (변경되지 않는 리스트)
+menu=("돈까스","치즈까스")
+(name, age, hobby) = ("김종국", 20, "코딩")
+
+[세트] (중복 안됨, 순서 없음)
+myset={1,2,3,4,4,4} => {1,2,3,4}
+java={"유재석", "김태호","양세형"}
+python=set(["유재석", "박명수"])
+java & python => {"유재석"}
+== java.intersection(python)
+java | python 
+== java.union(python)
+java - python
+==java.difference(python)
+python.add("김태호")
+java.remove("양세형")
+
+[자료형 변환]
+menu={"커피", "우유", "주스"}
+type(menu) == <class 'set'>
+list(menu)
+type(menu) == <class 'list'>
+tuple(menu)
+type(menu) == <class 'tuple'>
+
+from random import *
+lst=list(range(1,20))
+ch = sample(lst,1)
+chicken=ch[0]
+lst.remove(chicken)
+co = sample(lst,3)
+print(f"--당첨자 발표--\n치킨 당첨자 : {chicken}\n커피 당첨자 : {co}\n-- 축하합니다 --")
