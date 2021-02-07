@@ -14,12 +14,12 @@ df = pd.DataFrame(exam_data, index=['me','you','he'])
 print(df)
 print('-------------------')
 
-print(df.loc['me'])
+print(df.loc[['me']])
 print(df.loc[['me','you']][['math','sci']])
 
 print('-------------------')
 print(df[['math']])     #단일 괄호시 시리즈, 이중 괄호시 데이터프레임으로 출력
-print(df['math'])
+print(df['math'].iloc[[0,1]])
 print(df[['math']].loc['you'])
 
 print('-------------------')

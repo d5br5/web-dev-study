@@ -10,8 +10,8 @@ import pandas as pd
 
 list_data = ['123456', 123, True,'happy'] 
 
-sr = pd.Series(list_data)
-
+sr = pd.Series(list_data, index=['gd','gd','sdf','dd'])
+print(sr)
 print(sr[2])
 
 print(sr.index)     # RangeIndex(start=0, stop=4, step=1)

@@ -14,12 +14,15 @@ df = pd.DataFrame(dict_data)
 print(df)
 
 print(df['c0'][2])
+print(df.loc[2]['c2'])
+print('------------------')
 
+print()
 print('\n')
 print('=====================')
 print('\n')
 
-df = pd.DataFrame([['준서', 30, '덕영중'],['혜민',25,'옥정중']], index=['man','woman'], columns=['name','age','middle school'])
+df = pd.DataFrame([['준서', 30, '덕영중'],['혜민',25,'옥정중']], index=['man','woman'])
 
 print(df)
 
