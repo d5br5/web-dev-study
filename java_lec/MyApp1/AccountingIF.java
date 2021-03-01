@@ -1,6 +1,3 @@
-import javax.swing.JOptionPane;
-
-
 class Accountings{
 	
 	public  double valueOfSupply;
