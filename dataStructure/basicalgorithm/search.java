@@ -1,4 +1,4 @@
-
+package basicalgorithm;
 public class search {
 
 	static int binSearch(int[] a, int key) {

@@ -1,4 +1,4 @@
-
+package stackque;
 public class IntStack {
 
 	private int max;

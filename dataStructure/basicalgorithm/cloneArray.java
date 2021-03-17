@@ -1,3 +1,5 @@
+
+package basicalgorithm;
 import java.util.Random;
 import java.util.Scanner;
 

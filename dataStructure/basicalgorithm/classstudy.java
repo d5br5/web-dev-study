@@ -1,3 +1,4 @@
+package basicalgorithm;
 
 public class classstudy {
 	static final int VMAX =21;

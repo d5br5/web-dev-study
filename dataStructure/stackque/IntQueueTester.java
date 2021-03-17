@@ -1,4 +1,7 @@
+package stackque;
 import java.util.Scanner;
+
+import stackque.IntQueue.OverflowIntQueueException;
 
 public class IntQueueTester {
 
@@ -21,7 +24,7 @@ public class IntQueueTester {
 				x=stdIn.nextInt();
 				try {
 					s.enque(x);
-				}catch(IntStack.OverflowIntStackException e) {
+				}catch(IntQueue.OverflowIntQueueException e) {
 					System.out.println("full stack");
 				}
 				break;
@@ -30,7 +33,7 @@ public class IntQueueTester {
 				try {
 					x = s.deque();
 					System.out.println(x+": deque");
-				}catch(IntStack.EmptyIntStackException e) {
+				}catch(IntQueue.EmptyIntQueueException e) {
 					System.out.println("empty stack");
 				}
 				break;
@@ -39,7 +42,7 @@ public class IntQueueTester {
 				try {
 					x=s.peek();
 					System.out.println(x+" peek");
-				}catch(IntStack.EmptyIntStackException e) {
+				}catch(IntQueue.EmptyIntQueueException e) {
 					System.out.println("empty stack");
 				}
 				break;

@@ -1,4 +1,6 @@
 
+package stackque;
+
 public class IntQueue {
 	private int max;
 	private int front;

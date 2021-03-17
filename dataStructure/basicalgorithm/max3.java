@@ -1,3 +1,5 @@
+package basicalgorithm;
+
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -11,7 +13,7 @@ class Max3m{
 	}
 }
 
-public class Max3 {
+public class max3 {
 
 	public static void main(String[] args) {
 		Scanner stdIn = new Scanner(System.in);

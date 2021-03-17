@@ -1,3 +1,6 @@
+package stackque;
+
+
 import java.util.Scanner;
 
 public class IntStackTest {
