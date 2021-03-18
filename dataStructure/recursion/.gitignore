@@ -1,2 +1,8 @@
 /factorial.class
 /euclid.class
+/recur.class
+/IntStack$EmptyIntStackException.class
+/IntStack$OverflowIntStackException.class
+/IntStack.class
+/hanoi.class
+/eightqueen.class
