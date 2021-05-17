@@ -2,12 +2,17 @@
 web coding study
 
 
-## Language List
+## Web
 
 - HTML, CSS, JS
 - PHP + MySQL
 - NodeJs 
 - ReactJS
 - ExpressJs
-- Python
 - Java
+
+## Machine Learning
+
+- Python
+- Pandas
+- tensorflow
