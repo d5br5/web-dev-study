@@ -1,0 +1,37 @@
+import React from "react";
+import {HashRouter as Router, Route, Switch, Redirect} from "react-router-dom";
+import Auth from "routes/Auth";
+import Home from "routes/Home";
+import Navigation from "components/Navigation";
+import Profile from "routes/Profile";
+
+function AppRouter({isLoggedIn, userObj}) {
+
+    return (
+        <Router>
+            {isLoggedIn && <Navigation/>}
+            <Switch>
+                {isLoggedIn ? (
+                    <>
+                        <Route exact={true} path="/">
+                            <Home userObj={userObj} />
+                        </Route>
+                        <Route exact={true} path="/profile">
+                            <Profile/>
+                        </Route>
+                        <Redirect from="*" to="/"></Redirect>
+                    </>
+                ) : (
+                    <>
+                        <Route exact={true} path="/">
+                            <Auth/>
+                        </Route>
+                        <Redirect from="*" to="/"></Redirect>
+                    </>
+                )}
+            </Switch>
+        </Router>
+    )
+}
+
+export default AppRouter;
