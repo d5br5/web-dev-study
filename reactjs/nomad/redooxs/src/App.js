@@ -1,9 +1,14 @@
-import Screen from "./Screen";
+import Screen from "./LangContext/Screen";
+import Lang from "./LangContext/LangContext";
+import translations from "./LangContext/translations";
 
 function App() {
+
   return (
     <div className="App">
-      <Screen/>
+      <Lang defaultLang="en" translations={translations}>
+        <Screen/>
+      </Lang>
     </div>
   );
 }
