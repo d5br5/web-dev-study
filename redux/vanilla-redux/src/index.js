@@ -1,30 +1,57 @@
 import {createStore} from "redux";
 
-const plus = document.getElementById("add");
-const minus = document.getElementById("minus");
-const number = document.querySelector("span");
+const form = document.querySelector("form");
+const input = document.querySelector("input");
+const ul = document.querySelector("ul");
 
-const ADD = "add";
-const MINUS = "minus";
+const ADD_TODO = "ADD_TODO";
+const DELETE_TODO = "DELETE_TODO";
 
-const reducer = (count = 0, action) => {
-  if (action.type === ADD) return count + 1;
-  else if (action.type === MINUS) return count - 1;
-  else return count;
+const reducer = (todo = [], action) => {
+  switch (action.type) {
+    case ADD_TODO:
+      return [{text: action.text, id: Date.now()}, ...todo];
+    case DELETE_TODO:
+      return todo.filter(a=>a.id!==action.id);
+    default :
+      return todo;
+  }
 }
 
-const onChange = () => {
-  number.innerText = countStore.getState();
+const todoStore = createStore(reducer);
+
+const deleteTodo = (e) =>{
+  const id = parseInt(e.target.parentNode.id);
+  todoStore.dispatch({type: DELETE_TODO, id});
+  console.log(id);
 }
 
-const countStore = createStore(reducer);
-countStore.subscribe(onChange);
+const paintToDos = () => {
+  const toDos = todoStore.getState();
+  ul.innerHTML="";
+  toDos.forEach(todo => {
+    const li = document.createElement("li");
+    li.innerText = todo.text;
+    li.id = todo.id;
+    const btn = document.createElement("button");
+    btn.innerText="DEL";
+    btn.addEventListener("click", deleteTodo);
+    li.appendChild(btn);
+    ul.appendChild(li);
+  })
+}
 
+todoStore.subscribe(paintToDos);
 
-plus.addEventListener("click", () => {
-  countStore.dispatch({type: ADD})
-});
+const addToDo = (text) => {
+  todoStore.dispatch({type: ADD_TODO, text});
+}
 
-minus.addEventListener("click", () => {
-  countStore.dispatch({type: MINUS})
-});
+const onSubmit = e => {
+  e.preventDefault();
+  const toDo = input.value;
+  input.value = "";
+  addToDo(toDo);
+}
+
+form.addEventListener("submit", onSubmit);
